@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formvalidation</title>
+    <style>
+      .error {
+        color: red;
+        display: none;
+      }
+      body {
+        background: linear-gradient(to right, #8360c3, #9082ac);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      form {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th {
+        padding: 3px 10px;
+        text-align: left;
+      }
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+      input {
+        padding: 10px;
+        border-radius: 5px;
+      }
+      span {
+        font-size: 12px;
+      }
+      button {
+        background-color: #8360c3;
+        border: solid black 1px;
+        padding: 10px;
+        margin: 5px 20px;
+        width: 80%;
+        color: white;
+        font-weight: bolder;
+      }
+
+      button:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <h1 style="text-align: center">SignUp Form</h1>
+      <table>
+        <th><label>Name:</label></th>
+        <tr>
+          <td><input type="text" placeholder="Enter your Name" id="name" /></td>
+          <td><span class="nameemperror error">"Name is required"</span></td>
+          <td>
+            <span class="nameerror error"
+              >"Name must contain only letters"</span
+            >
+          </td>
+        </tr>
+
+        <th><label>Email:</label></th>
+        <tr>
+          <td>
+            <input
+              type="text"
+              placeholder="Enter your EmailAddress"
+              id="email"
+            />
+          </td>
+          <td><span class="emailemperror error">"Email is required"</span></td>
+          <td><span class="emailerror error">"Enter a valid email"</span></td>
+        </tr>
+        <th><label>Password:</label></th>
+        <tr>
+          <td>
+            <input
+              type="text"
+              placeholder="Enter your Password"
+              id="Password"
+            />
+          </td>
+          <td>
+            <span class="passwordemperror error">"Password is required"</span>
+          </td>
+          <td>
+            <span class="passworderror error"
+              >"Password must be at least 6 characters"</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <td><button type="submit" id="submit" disabled>SignUp</button></td>
+        </tr>
+      </table>
+    </form>
+
+    <script>
+      var button = document.getElementById("submit");
+
+      var nameInput = document.getElementById("name");
+      var email = document.getElementById("email");
+      var password = document.getElementById("Password");
+
+      var nameregex = /^[a-zA-Z]+$/;
+      var emailregex = /^[a-zA-Z0-9]+@gmail\.com/;
+      var passwordregex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
+
+      function checkAllValid() {
+        let isNameValid = nameregex.test(nameInput.value);
+        let isEmailValid = emailregex.test(email.value);
+        let isPasswordValid = passwordregex.test(password.value);
+
+        button.disabled = !(isNameValid && isEmailValid && isPasswordValid);
+      }
+      //name
+      nameInput.addEventListener("input", () => {
+        if (nameInput.value === "") {
+          document.querySelector(".nameemperror").style.display = "inline";
+          document.querySelector(".nameerror").style.display = "none";
+        } else if (!nameregex.test(nameInput.value)) {
+          document.querySelector(".nameerror").style.display = "inline";
+          document.querySelector(".nameemperror").style.display = "none";
+        } else {
+          document.querySelector(".nameerror").style.display = "none";
+          document.querySelector(".nameemperror").style.display = "none";
+        }
+        checkAllValid();
+      });
+
+      // email
+      email.addEventListener("input", () => {
+        if (email.value === "") {
+          document.querySelector(".emailemperror").style.display = "inline";
+          document.querySelector(".emailerror").style.display = "none";
+        } else if (!emailregex.test(email.value)) {
+          document.querySelector(".emailerror").style.display = "inline";
+          document.querySelector(".emailemperror").style.display = "none";
+        } else {
+          document.querySelector(".emailerror").style.display = "none";
+          document.querySelector(".emailemperror").style.display = "none";
+        }
+        checkAllValid();
+      });
+
+      // password
+      password.addEventListener("input", () => {
+        if (password.value === "") {
+          document.querySelector(".passwordemperror").style.display = "inline";
+          document.querySelector(".passworderror").style.display = "none";
+        } else if (!passwordregex.test(password.value)) {
+          document.querySelector(".passworderror").style.display = "inline";
+          document.querySelector(".passwordemperror").style.display = "none";
+        } else {
+          document.querySelector(".passworderror").style.display = "none";
+          document.querySelector(".passwordemperror").style.display = "none";
+        }
+        checkAllValid();
+      });
+    </script>
+  </body>
+</html>
