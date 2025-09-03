@@ -1,4 +1,4 @@
-# Task 1: Signup Form Validation
+# Signup Form Validation
 
 A signup form with Name, Email, and Password fields.  
 - Validates inputs in real-time.  
